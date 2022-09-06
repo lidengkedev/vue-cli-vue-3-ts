@@ -10,7 +10,7 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '/home',
-        component: () => import('../views/home.vue'),
+        component: () => import('../views/Home.vue'),
         meta: { title: '首页' }
       }, {
         path: '/user/list',

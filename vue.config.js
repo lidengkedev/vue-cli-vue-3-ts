@@ -7,7 +7,8 @@ module.exports = {
   },
   devServer: {
     host,
-    port
+    port,
+    disableHostCheck: true
   },
   publicPath: process.env.VUE_APP_WEBSITE_BASE
 }
