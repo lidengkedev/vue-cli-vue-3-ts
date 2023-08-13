@@ -14,6 +14,9 @@
         <el-col :span="4" class="header-right">
           <el-button type="text">
             <el-icon :size="20" color="#FFFFFF"><avatar /></el-icon>
+            <span class="username">
+              {{ username }}
+            </span>
           </el-button>
           <el-button type="text" class="logout-btn" @click="handleLogout">
             <el-icon :size="20"><switch-button /></el-icon>
@@ -62,6 +65,8 @@ import { useRoute, useRouter } from "vue-router";
 import { SwitchButton, Avatar, Expand, Fold, Goods, List } from '@element-plus/icons-vue'
 import { ElMessageBox } from "element-plus";
 import { ElMessage } from "element-plus/lib/components";
+import { mapState } from "vuex";
+import store from "@/store";
 
 export default defineComponent({
   components: {
@@ -76,6 +81,7 @@ export default defineComponent({
     const router = useRouter();
     const route = useRoute()
     const defaultActive = computed(() => route.path)
+    const username = computed(() =>  store.state.username)
 
     const is_menu_open = ref(true)
     
@@ -97,6 +103,7 @@ export default defineComponent({
       is_menu_open,
       menuList,
       defaultActive,
+      username,
       handleLogout,
     };
   },
@@ -120,6 +127,9 @@ h2 {
   text-align: right;
   .logout-btn {
     color: #ffffff;
+  }
+  .username {
+    color: #fff;
   }
 }
 .aside-menu {

@@ -1,9 +1,12 @@
 import PermissionModuleTypes from "./permission.interface"
+import UserModuleTypes from "./user.interface"
 
 export default interface RootStateTypes {
-    test: string
+    test: string,
+    username: string
 }
 
 export interface AllStateTypes extends RootStateTypes {
-    permission: PermissionModuleTypes
+    permission: PermissionModuleTypes,
+    user: UserModuleTypes
 }

@@ -30,6 +30,7 @@ import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus/lib/components'
 import { setToken } from '@/utils/auth'
 import { UserFilled, Lock } from '@element-plus/icons-vue'
+import store from '@/store'
 
 export default defineComponent({
   setup() {
@@ -37,6 +38,8 @@ export default defineComponent({
     form.form.username = 'admin'
     form.form.password = '123456'
     const router = useRouter()
+    console.log(store)
+    
     const rules = reactive({
       username: [
         { required: true, message: '请输入用户名', trigger: 'blur' },
@@ -51,6 +54,8 @@ export default defineComponent({
       ref?.validate((valid) => {
         if (valid) {
           login(form.form).then(res => {
+            console.log(store)
+            store.dispatch('username', form.form.username)
             console.log('登录成功')
             ElMessage.success('登录成功')
             setToken(res.data.token)
