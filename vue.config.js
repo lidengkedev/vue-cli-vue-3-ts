@@ -3,7 +3,7 @@ const port = process.env.VUE_APP_PORT
 
 module.exports = {
   pwa: {
-    name: 'v3-ts'
+    name: 'vite-vue3-typescript'
   },
   devServer: {
     host,
