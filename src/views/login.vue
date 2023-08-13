@@ -1,6 +1,6 @@
 <template>
   <div class="login-warpper">
-    <el-form ref="loginFormRef" :model="form" :rules="rules" @submit.prevent label-width="80px" class="login-form" size="large">
+    <el-form ref="loginFormRef" :model="form" :rules="rules" @submit.prevent label-width="120px" class="login-form" size="large">
       <h1>后台管理系统</h1>
       <el-form-item label="用户名：" prop="username">
         <el-input
@@ -80,16 +80,18 @@ export default defineComponent({
   background-color: #409eff;
 }
 .login-form {
-  width: 400px;
-  padding: 0 20px 20px;
+  width: 450px;
+  padding: 20px;
   margin: 0 auto;
-  margin-top: 15vh;
+  margin-top: 30vh;
   border: 1px solid #eaeaea;
-  border-radius: 20px;
+  border-radius: 5px;
   background-color: #FFFFFF;
   h1 {
     text-align: center;
-    margin: 20px auto;
+    // margin: 20px auto;
+    margin-top: 20px;
+    margin-bottom: 40px;
     font-size: 24px;
   }
   .login-btn {
