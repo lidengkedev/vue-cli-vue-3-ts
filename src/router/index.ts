@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Loayout from '../layout/default.vue'
+import Layout from '../layout/default.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
     redirect: '/product/list',
-    component: Loayout,
+    component: Layout,
     children: [
       {
         path: '/home',
@@ -26,13 +26,26 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/product',
     name: 'Product',
-    component: Loayout,
+    component: Layout,
     meta: { title: '商品', hidden: false, aside: false },
     children: [
       {
         path: '/product/list',
         component: () => import('../views/product/product-list.vue'),
         meta: { title: '商品列表', hidden: false, aside: true }
+      }
+    ]
+  },
+  {
+    path: '/todo',
+    name: 'Todo',
+    component: Layout,
+    meta: { title: '代办', hidden: false, aside: false },
+    children: [
+      {
+        path: '/todo-list',
+        component: () => import('../views/todo/todo-list.vue'),
+        meta: { title: '代办', hidden: false, aside: true }
       }
     ]
   },
