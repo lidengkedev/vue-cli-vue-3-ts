@@ -21,8 +21,8 @@
               class="todo-content-textarea"
               @keyup.enter.native="handleToDoItem">
           </div>
-          <div class="todo-delete-warp">
-            <el-button type="danger" :icon="Delete" circle @click="handleToDoItemDelete(item)" />
+          <div v-if="todoItem.length > 1" class="todo-delete-warp">
+            <el-button type="danger" :icon="Delete" circle @click="handleToDoItemDelete(item, index)" />
           </div>
         </div>
       </div>
@@ -33,12 +33,32 @@
 <script lang="ts" setup>
 import { Delete } from '@element-plus/icons-vue'
 import { computed, defineComponent, nextTick, onMounted, reactive, ref, toRefs } from 'vue'
+import Database from '@/utils/indexdb'
 interface ToDoItem {
   id: string | number,
   checked: boolean,
   focus: boolean,
   todo: string
 }
+const database = new Database()
+database.connect('database', 1).then(res => {
+  if (database.hasObjectStoreNames('todo')) {
+    const request = database.db.transaction(['todo']).objectStore('todo').getAll()
+    request.onsuccess = function () {
+      console.log(request.result)
+    }
+  } else {
+    const initTodoTable = [
+      { name: 'id', unique: false },
+      { name: 'checked', unique: false },
+      { name: 'focus', unique: false },
+      { name: 'todo', unique: false },
+      { name: 'state', unique: false },
+      { name: 'date', unique: false }
+    ]
+    database.create('todo', initTodoTable, { keyPath: 'id' })
+  }
+})
 const todoItem = ref([{
   id: Date.now(),
   checked: false,
@@ -50,9 +70,9 @@ const vFocus = {
   mounted: (el: HTMLInputElement) => el.focus()
 }
 const handleToDoItem = () => {
-  // console.log('todo-item')
   todoItem.value.forEach(item => {
     item.focus = false
+    database.add('todo', {...item, state: item.checked ? 2 : 1, date: ''})
   })
   todoItem.value.push({
     id: Date.now(),
@@ -62,7 +82,6 @@ const handleToDoItem = () => {
   })
 }
 const handleToDoItemFocus = (data: ToDoItem) => {
-  // console.log('todo-item-focus')
   todoItem.value.forEach(item => {
     if (item.id === data.id) {
       item.focus = true
@@ -71,15 +90,8 @@ const handleToDoItemFocus = (data: ToDoItem) => {
     }
   })
 }
-const handleToDoItemDelete = (data: ToDoItem) => {
-  todoItem.value.forEach(item => {
-    if (item.id === data.id) {
-      item.todo = ''
-      item.focus = true
-    } else {
-      item.focus = false
-    }
-  })
+const handleToDoItemDelete = (data: ToDoItem, index: number) => {
+  todoItem.value.splice(index, 1)
 }
 </script>
 

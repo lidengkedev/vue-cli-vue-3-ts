@@ -43,9 +43,13 @@ const routes: Array<RouteRecordRaw> = [
     meta: { title: '代办', hidden: false, aside: false },
     children: [
       {
-        path: '/todo-list',
+        path: '/todo/todo',
         component: () => import('../views/todo/todo-list.vue'),
-        meta: { title: '代办', hidden: false, aside: true }
+        meta: { title: '代办事项', hidden: false, aside: false }
+      }, {
+        path: '/todo/record',
+        component: () => import('../views/todo/todo-record.vue'),
+        meta: { title: '代办记录', hidden: false, aside: false }
       }
     ]
   },

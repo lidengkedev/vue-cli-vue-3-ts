@@ -49,6 +49,20 @@
               {{ item.meta.title }}
             </el-menu-item>
           </el-sub-menu>
+          <el-sub-menu index="2">
+            <template #title>
+              <el-icon><list /></el-icon>
+              <span>代办</span>
+            </template>
+            <el-menu-item index="/todo/todo">
+              <el-icon><list /></el-icon>
+              代办清单
+            </el-menu-item>
+            <el-menu-item index="/todo/record">
+              <el-icon><list /></el-icon>
+              代办记录
+            </el-menu-item>
+          </el-sub-menu>
         </el-menu>
       </el-aside>
       <el-main>

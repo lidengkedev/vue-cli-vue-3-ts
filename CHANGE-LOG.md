@@ -8,3 +8,4 @@
 - 在 ts 中使用 computed 时存在的问题
   - `const username = computed(() => ...mapState('user', ['username']))` 写法报错
 - `npx update-browserslist-db@latest`命令不能随便使用，它会把项目所有依赖包更新到最新版本，会导致项目崩坏
+- indexdb 新增代办事项报错，具体原因尚不明确。
