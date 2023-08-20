@@ -78,7 +78,7 @@ const handleToDoItem = (item: ToDoItem) => {
   if (!item.todo) return
   todoItem.value.forEach(item => {
     item.focus = false
-    database.add('todo', {...item, state: item.checked ? 2 : 1, date: ''})
+    database.add('todo', {...item, state: item.checked ? 2 : 1, date: new Date().toLocaleString()})
   })
   todoItem.value.push({
     id: Date.now(),

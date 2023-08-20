@@ -7,9 +7,9 @@ class Database {
   public db: any = null
   public request: any = null
 
-  connect(sql: string, version: number = 1) {
+  connect(dbName: string, version: number = 1) {
     return new Promise((resolve, reject) => {
-      this.request = window.indexedDB.open(sql, version)
+      this.request = window.indexedDB.open(dbName, version)
       this.request.onsuccess = (e: EventTarget) => {
         this.db = this.request.result
         resolve(e)

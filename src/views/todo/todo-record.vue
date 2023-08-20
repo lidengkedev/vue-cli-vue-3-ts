@@ -10,18 +10,25 @@
 </template>
 
 <script lang="ts" setup>
+import Database from '@/utils/indexdb';
+import { reactive, ref } from 'vue';
+
 interface ToDoItem {
   id: string | number,
+  checked: boolean,
+  focus: boolean,
   state: number,
-  date: string,
   todo: string
 }
-const tableData: ToDoItem[] = []
-tableData.push({
-  id: 1,
-  state: 1,
-  date: '2023-08-15',
-  todo: '这是一个代办事项'
+let tableData = ref([])
+const database = new Database()
+database.connect('database', 1).then(res => {
+  if (database.hasObjectStoreNames('todo')) {
+    const request = database.db.transaction(['todo']).objectStore('todo').getAll()
+    request.onsuccess = function () {
+      tableData.value = request.result
+    }
+  }
 })
 </script>
 
