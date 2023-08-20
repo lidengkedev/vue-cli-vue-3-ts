@@ -10,11 +10,11 @@ class Database {
   connect(sql: string, version: number = 1) {
     return new Promise((resolve, reject) => {
       this.request = window.indexedDB.open(sql, version)
-      // this.request.onsuccess = (e: EventTarget) => {
-      //   this.db = this.request.result
-      //   resolve(e)
-      //   this.success(e, '数据库打开成功')
-      // }
+      this.request.onsuccess = (e: EventTarget) => {
+        this.db = this.request.result
+        resolve(e)
+        this.success(e, '数据库打开成功')
+      }
       this.request.onerror = (e: EventTarget) => {
         reject(e)
         this.error(e, '数据库打开报错')

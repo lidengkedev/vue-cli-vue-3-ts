@@ -19,7 +19,7 @@
               type="textarea"
               row="1"
               class="todo-content-textarea"
-              @keyup.enter.native="handleToDoItem">
+              @keyup.enter.native="handleToDoItem(item)">
           </div>
           <div v-if="todoItem.length > 1" class="todo-delete-warp">
             <el-button type="danger" :icon="Delete" circle @click="handleToDoItemDelete(item, index)" />
@@ -40,12 +40,27 @@ interface ToDoItem {
   focus: boolean,
   todo: string
 }
+const todoItem = ref([{
+  id: Date.now(),
+  checked: false,
+  focus: true,
+  todo: ''
+}])
+// 必须以v开头的指令才能起效
+const vFocus = {
+  mounted: (el: HTMLInputElement) => el.focus()
+}
 const database = new Database()
 database.connect('database', 1).then(res => {
   if (database.hasObjectStoreNames('todo')) {
     const request = database.db.transaction(['todo']).objectStore('todo').getAll()
     request.onsuccess = function () {
-      console.log(request.result)
+      todoItem.value = request.result.length > 0 ? request.result : [{
+        id: Date.now(),
+        checked: false,
+        focus: true,
+        todo: ''
+      }]
     }
   } else {
     const initTodoTable = [
@@ -59,17 +74,8 @@ database.connect('database', 1).then(res => {
     database.create('todo', initTodoTable, { keyPath: 'id' })
   }
 })
-const todoItem = ref([{
-  id: Date.now(),
-  checked: false,
-  focus: true,
-  todo: ''
-}])
-// 必须以v开头的指令才能起效
-const vFocus = {
-  mounted: (el: HTMLInputElement) => el.focus()
-}
-const handleToDoItem = () => {
+const handleToDoItem = (item: ToDoItem) => {
+  if (!item.todo) return
   todoItem.value.forEach(item => {
     item.focus = false
     database.add('todo', {...item, state: item.checked ? 2 : 1, date: ''})
