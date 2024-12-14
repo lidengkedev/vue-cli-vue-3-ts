@@ -124,10 +124,10 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .el-header {
   line-height: 60px;
-  background-color: rgba($color: #545c64, $alpha: 1);
+  background-color: #545c64;
 }
 .logo {
   width: 60px;
@@ -139,12 +139,12 @@ h2 {
 }
 .header-right {
   text-align: right;
-  .logout-btn {
-    color: #ffffff;
-  }
-  .username {
-    color: #fff;
-  }
+}
+.header-right .username {
+  color: #fff;
+}
+.header-right .logout-btn {
+  color: #ffffff;
 }
 .aside-menu {
   height: calc(100vh - 60px);

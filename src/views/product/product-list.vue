@@ -77,7 +77,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .table-footer {
     position: absolute;
     right: 10px;

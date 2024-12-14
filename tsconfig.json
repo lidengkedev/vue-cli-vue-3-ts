@@ -10,10 +10,15 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
+    "allowJs": true,
     "baseUrl": ".",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "baseUrl": "./",
     "types": [
       "jest",
-      "node"
+      "node",
+      "element-plus/global"
     ],
     "paths": {
       "@/*": [
@@ -30,9 +35,7 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "src/**/*.vue"
   ],
   "exclude": [
     "node_modules"

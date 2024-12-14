@@ -32,7 +32,7 @@ database.connect('database', 1).then(res => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .todo-warpper {
   width: 100%;
 }

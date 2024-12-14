@@ -107,7 +107,7 @@ export default defineComponent({
             authority.is_show_dialog_auth = true
             console.log(treeRef)
             nextTick(() => {
-                treeRef.value!.setCheckedKeys(row.authority)
+                (treeRef as any).value.setCheckedKeys(row.authority)
             })
         }
         return {
@@ -125,7 +125,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .action-warpper {
     margin-bottom: 15px;
 }

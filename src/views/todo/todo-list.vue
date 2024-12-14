@@ -101,7 +101,7 @@ const handleToDoItemDelete = (data: ToDoItem, index: number) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .todo-warpper {
   width: 100%;
 }

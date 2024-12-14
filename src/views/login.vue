@@ -50,8 +50,8 @@ export default defineComponent({
         { min: 4, max: 24, message: '用户名长度在4~24之间', trigger: 'blur' }
       ]
     })
-    const handleLogin = (ref: FormInstance | undefined) => {
-      ref?.validate((valid) => {
+    const handleLogin = (ref: FormInstance | any) => {
+      ref?.validate((valid: boolean) => {
         if (valid) {
           login(form.form).then(res => {
             console.log(store)
@@ -78,7 +78,7 @@ export default defineComponent({
 </script>
 
 
-<style lang="scss" scoped>
+<style scoped>
 .login-warpper {
   height: 100vh;
   overflow: hidden;
@@ -92,15 +92,14 @@ export default defineComponent({
   border: 1px solid #eaeaea;
   border-radius: 5px;
   background-color: #FFFFFF;
-  h1 {
-    text-align: center;
-    // margin: 20px auto;
-    margin-top: 20px;
-    margin-bottom: 40px;
-    font-size: 24px;
-  }
-  .login-btn {
-    width: 100%;
-  }
+}
+.login-form h1 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  font-size: 24px;
+}
+.login-form .login-btn {
+  width: 100%;
 }
 </style>
